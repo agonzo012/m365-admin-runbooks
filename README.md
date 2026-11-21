@@ -13,8 +13,8 @@ Professional/Enterprise subscribers, partner program members, or
 Premier/Unified Support customers, and a personal account does not
 qualify. This work uses the tenant that comes with the Azure free
 trial, unblocked by a 30-day Microsoft 365 Business Premium trial
-(free, $0.00, expires Dec 21, 2026, recurring billing Off). One trial
-license is assigned to the admin account (1/25 assigned).
+(free, $0.00, expires Dec 21, 2026, recurring billing Off). Two trial
+licenses are assigned (2/25): the admin account and Alex Rivera.
 
 ## Tools Used
 
@@ -52,24 +52,37 @@ To repeat it: SharePoint admin center > Sites > Active sites >
 Create > Team site (Standard template) > name it, set the Group
 owner, choose Privacy, and create.
 
-### Exchange mail flow rule and shared mailbox — blocked
+### Exchange shared mailbox and mail flow rule — done Nov 21, 2026
 
-Not created yet. The Exchange admin center would not load on
-Nov 21, 2026 — it failed persistently with "Error: Parsing of
-Response Content Failed in Api Operations" (4 attempts: home page,
-reload, mailboxes deep link, retry after a wait). This looks like
-Exchange Online still provisioning for the new tenant, or an EAC
-API failure. The plan is a shared mailbox "IT Support"
-(itsupport@alvingonzogmail.onmicrosoft.com, Alex Rivera as member)
-and a mail flow rule "Prepend EXTERNAL to outside mail" that
-prepends "[EXTERNAL]" to the subject of messages from outside the
-organization. Retry once the admin center loads.
+The Exchange admin center failed all day with "Error: Parsing of
+Response Content Failed in Api Operations" (6 attempts across two
+sessions). It finally loaded ~6:06 PM EST, once Exchange Online
+provisioning for the new tenant had finished.
+
+Shared mailbox "IT Support" (itsupport@alvingonzogmail.onmicrosoft.com)
+created and verified in Recipients > Mailboxes (SharedMailbox).
+Alex Rivera added as a Full Access member. Note: Alex was Unlicensed
+with no mailbox, so a Business Premium trial seat was assigned to him
+first (now 2/25 assigned, 23 available; total still 25 seats). His
+mailbox provisioned within a minute, then he was added as Full Access.
+
+Mail flow rule "Prepend EXTERNAL to outside mail" created and ENABLED
+(rule ID c3145b90-85ef-41b4-a56b-4d02160d84a8). Condition: the sender is
+from outside the organization. Action: prepend "[EXTERNAL]" to the
+subject. Mode: Enforce, Priority 0. Note: the wizard creates the rule
+disabled by default; it was turned on with the Enable/disable switch.
+
+To repeat it: Exchange admin center > Recipients > Mailboxes > Add a
+shared mailbox, name it "IT Support", add Alex Rivera as a Full Access
+member. Then Mail flow > Rules > Add a rule > Create a new rule, set
+the condition to "The sender is located outside the organization",
+the action to "Prepend the subject of the message with" "[EXTERNAL]",
+set the mode to Enforce, save, then turn the rule on with the
+Enable/disable switch.
 
 ## Status
 
-Teams and SharePoint are done and written up above. Exchange is
-blocked on the admin center failing to load; it will be retried and
-documented here when it works.
+Teams, SharePoint, and Exchange are all done and written up above.
 
 ## Why It Matters
 
@@ -79,7 +92,5 @@ and get it right.
 
 ## Next Steps
 
-- Retry the Exchange admin center and finish the shared mailbox and
-  mail flow rule, then write them up here.
 - The remaining portfolio work is Intune device management (see the
   intune-device-management repo).
