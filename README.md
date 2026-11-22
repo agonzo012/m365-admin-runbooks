@@ -13,8 +13,7 @@ Professional/Enterprise subscribers, partner program members, or
 Premier/Unified Support customers, and a personal account does not
 qualify. This work uses the tenant that comes with the Azure free
 trial, unblocked by a 30-day Microsoft 365 Business Premium trial
-(free, $0.00, expires Dec 21, 2026, recurring billing Off). Two trial
-licenses are assigned (2/25): the admin account and Alex Rivera.
+(free, $0.00, expires Dec 21, 2026, recurring billing Off). Two trial licenses are assigned (admin account + Alex Rivera, 2/25).
 
 ## Tools Used
 
@@ -31,8 +30,9 @@ Custom meeting policy "Lab Meeting Policy" in the Teams admin center.
 Settings: Who can present = "Only organizers and co-organizers" (the
 Teams UI's strictest option — there is no literal "Organizer only"
 choice), Meeting recording = Off. Assigned to Alex Rivera (Direct
-assignment); his Policies tab shows Meeting policy "Lab Meeting
-Policy".
+assignment); his Policies tab shows Meeting policy "Lab Meeting Policy".
+
+Outcome: 'Lab Meeting Policy' is live and assigned to Alex Rivera — presenters restricted to organizers, recording off.
 
 To repeat it: Teams admin center > Meetings > Meeting policies >
 Add > name the policy, set Who can present to "Only organizers and
@@ -48,41 +48,35 @@ email ITDepartment, Privacy Private, Language English. Group owner:
 Alex Rivera (set as the required Group owner at creation; the site's
 Primary admin shows "Group owners" / "IT Department Owners").
 
+Outcome: the 'IT Department' team site is live at https://alvingonzogmail.sharepoint.com/sites/ITDepartment — Private, Alex Rivera as group owner.
+
 To repeat it: SharePoint admin center > Sites > Active sites >
 Create > Team site (Standard template) > name it, set the Group
 owner, choose Privacy, and create.
 
 ### Exchange shared mailbox and mail flow rule — done Nov 21, 2026
 
-The Exchange admin center failed all day with "Error: Parsing of
-Response Content Failed in Api Operations" (6 attempts across two
-sessions). It finally loaded ~6:06 PM EST, once Exchange Online
-provisioning for the new tenant had finished.
-
 Shared mailbox "IT Support" (itsupport@alvingonzogmail.onmicrosoft.com)
-created and verified in Recipients > Mailboxes (SharedMailbox).
-Alex Rivera added as a Full Access member. Note: Alex was Unlicensed
-with no mailbox, so a Business Premium trial seat was assigned to him
-first (now 2/25 assigned, 23 available; total still 25 seats). His
-mailbox provisioned within a minute, then he was added as Full Access.
-
-Mail flow rule "Prepend EXTERNAL to outside mail" created and ENABLED
-(rule ID c3145b90-85ef-41b4-a56b-4d02160d84a8). Condition: the sender is
-from outside the organization. Action: prepend "[EXTERNAL]" to the
-subject. Mode: Enforce, Priority 0. Note: the wizard creates the rule
-disabled by default; it was turned on with the Enable/disable switch.
+created in the Exchange admin center; Alex Rivera added as a Full Access
+member — he was Unlicensed with no mailbox, so a Business Premium seat
+was assigned to him first. Mail flow rule "Prepend EXTERNAL to outside
+mail" created and Enabled (rule ID c3145b90-85ef-41b4-a56b-4d02160d84a8):
+messages from outside the organization get "[EXTERNAL]" prepended to
+the subject; Enforce, Priority 0. (The admin center would not load
+earlier the same day — "Error: Parsing of Response Content Failed in
+Api Operations" — it loaded once provisioning finished.)
 
 To repeat it: Exchange admin center > Recipients > Mailboxes > Add a
-shared mailbox, name it "IT Support", add Alex Rivera as a Full Access
-member. Then Mail flow > Rules > Add a rule > Create a new rule, set
-the condition to "The sender is located outside the organization",
-the action to "Prepend the subject of the message with" "[EXTERNAL]",
-set the mode to Enforce, save, then turn the rule on with the
-Enable/disable switch.
+shared mailbox > name it, add members; then Mail flow > Rules > Add a
+rule > set the condition to outside the organization and the action to
+prepend "[EXTERNAL]" to the subject.
+
+Outcome: the shared mailbox is live with Alex Rivera as a member, and
+the mail flow rule is enabled — outside mail gets flagged [EXTERNAL].
 
 ## Status
 
-Teams, SharePoint, and Exchange are all done and written up above.
+Teams, SharePoint and Exchange are done and written up above.
 
 ## Why It Matters
 
@@ -92,5 +86,6 @@ and get it right.
 
 ## Next Steps
 
+- ~~Retry the Exchange admin center and finish the shared mailbox and mail flow rule~~ — Done Nov 21, 2026 (shared mailbox + mail flow rule live).
 - The remaining portfolio work is Intune device management (see the
   intune-device-management repo).
